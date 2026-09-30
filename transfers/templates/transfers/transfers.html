@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfers</title>
+</head>
+
+<body>
+
+    <h1>Military AMS - Transfers</h1>
+
+    <h2>Transfers Page Working</h2>
+
+    <table border="1">
+        <tr>
+            <th>Asset</th>
+            <th>From Base</th>
+            <th>To Base</th>
+            <th>Quantity</th>
+            <th>Transfer Date</th>
+        </tr>
+
+        {% for transfer in transfers %}
+        <tr>
+            <td>{{ transfer.asset.name }}</td>
+            <td>{{ transfer.from_base }}</td>
+            <td>{{ transfer.to_base }}</td>
+            <td>{{ transfer.quantity }}</td>
+            <td>{{ transfer.transfer_date }}</td>
+        </tr>
+
+        {% empty %}
+        <tr>
+            <td colspan="5">No transfers available</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

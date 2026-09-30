@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'products/style.css' %}">
+</head>
+
+<body>
+
+    <h1>Shopping Cart</h1>
+
+    {% if products %}
+
+        <div class="products-container">
+
+            {% for item in products %}
+
+                <div class="product-card">
+
+                    <h2>{{ item.product.name }}</h2>
+
+                    <p>
+                        Price: ₹{{ item.product.price }}
+                    </p>
+
+                    <p>
+                        Quantity: {{ item.quantity }}
+                    </p>
+
+                    <p class="price">
+                        Subtotal: ₹{{ item.subtotal }}
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <h2 style="text-align: center; margin-top: 30px;">
+            Total: ₹{{ total }}
+        </h2>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/products/">
+                Continue Shopping
+            </a>
+        </div>
+
+    {% else %}
+
+        <p style="text-align: center;">
+            Your cart is empty.
+        </p>
+
+        <div style="text-align: center;">
+            <a href="/products/">
+                Start Shopping
+            </a>
+        </div>
+
+    {% endif %}
+
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Military Asset Management Dashboard</title>
+
+    {% load static %}
+
+    <link rel="stylesheet"
+          href="{% static 'dashboard/style.css' %}">
+
+</head>
+
+
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Military AMS
+        </div>
+
+        <nav>
+
+            <!-- DASHBOARD -->
+            <a href="{% url 'dashboard' %}" class="active">
+                Dashboard
+            </a>
+
+
+            <!-- PURCHASES -->
+            <a href="{% url 'purchases' %}">
+                Purchases
+            </a>
+
+
+            <!-- TRANSFERS -->
+            <a href="{% url 'transfers' %}">
+                Transfers
+            </a>
+
+
+            <!-- ASSIGNMENTS -->
+            <a href="{% url 'assignments' %}">
+                Assignments
+            </a>
+
+
+            <!-- EXPENDITURES -->
+            <a href="{% url 'expenditures' %}">
+                Expenditures
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <h1>
+            Military Asset Management Dashboard
+        </h1>
+
+
+        <h2>
+            Logged in as:
+            <strong>Admin</strong>
+        </h2>
+
+
+        <!-- ================= FILTERS ================= -->
+
+        <section class="filters">
+
+            <h2>Filters</h2>
+
+            <div class="filter-row">
+
+                <div class="filter-item">
+
+                    <label for="date">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        name="date">
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label for="base">
+                        Base
+                    </label>
+
+                    <select id="base" name="base">
+
+                        <option value="">
+                            All Bases
+                        </option>
+
+                        <option value="Bangalore">
+                            Bangalore
+                        </option>
+
+                        <option value="Chennai">
+                            Chennai
+                        </option>
+
+                        <option value="Delhi">
+                            Delhi
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-item">
+
+                    <label for="equipment">
+                        Equipment Type
+                    </label>
+
+                    <select id="equipment" name="equipment">
+
+                        <option value="">
+                            All Equipment
+                        </option>
+
+                        <option value="Rifle">
+                            Rifle
+                        </option>
+
+                        <option value="Radio">
+                            Radio
+                        </option>
+
+                        <option value="Vehicle">
+                            Vehicle
+                        </option>
+
+                        <option value="Night Vision">
+                            Night Vision
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <section class="summary">
+
+
+            <!-- OPENING BALANCE -->
+
+            <div class="card blue">
+
+                <h2>
+                    Opening Balance
+                </h2>
+
+                <p>
+                    {{ opening_balance }}
+                </p>
+
+            </div>
+
+
+            <!-- CLOSING BALANCE -->
+
+            <div class="card green">
+
+                <h2>
+                    Closing Balance
+                </h2>
+
+                <p>
+                    {{ closing_balance }}
+                </p>
+
+            </div>
+
+
+            <!-- NET MOVEMENT -->
+
+            <div class="card cyan">
+
+                <h2>
+                    Net Movement
+                </h2>
+
+                <p>
+                    {{ net_movement }}
+                </p>
+
+                <a href="#">
+                    Click to View Details
+                </a>
+
+            </div>
+
+
+            <!-- ASSIGNED ASSETS -->
+
+            <div class="card orange">
+
+                <h2>
+                    Assigned Assets
+                </h2>
+
+                <p>
+                    {{ assigned_assets }}
+                </p>
+
+            </div>
+
+
+            <!-- TOTAL TRANSFERS -->
+
+            <div class="card red">
+
+                <h2>
+                    Total Transfers
+                </h2>
+
+                <p>
+                    {{ total_transfers }}
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= DETAILS TABLE ================= -->
+
+        <section class="details">
+
+            <h2>
+                Asset Summary
+            </h2>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Asset
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Base
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for asset in assets %}
+
+                    <tr>
+
+                        <td>
+                            {{ asset.name }}
+                        </td>
+
+                        <td>
+                            {{ asset.quantity }}
+                        </td>
+
+                        <td>
+                            {{ asset.base }}
+                        </td>
+
+                        <td>
+                            {{ asset.status }}
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4">
+                            No assets available.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

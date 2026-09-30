@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Products</title>
+
+    <link rel="stylesheet" href="{% static 'products/style.css' %}">
+</head>
+
+<body>
+
+    <h1>Our Products</h1>
+
+    <div class="products-container">
+
+        {% for product in products %}
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🛒
+                </div>
+
+                <h2>{{ product.name }}</h2>
+
+                <p class="description">
+                    {{ product.description }}
+                </p>
+
+                <p class="category">
+                    Category: {{ product.category }}
+                </p>
+
+                <p class="price">
+                    ₹{{ product.price }}
+                </p>
+
+                <p class="stock">
+                    Stock: {{ product.stock }}
+                </p>
+
+                <a href="{% url 'add_to_cart' product.id %}" class="add-cart">
+    Add to Cart
+</a>
+            </div>
+
+        {% empty %}
+
+            <p>No products available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>
